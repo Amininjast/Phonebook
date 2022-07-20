@@ -1,9 +1,9 @@
 package com.aminhadad;
 
-public class Contact {
+public class Contact  {
     private String firstName;
     private String lastName;
-    private String phoneNumber;
+    private PhoneNumber phoneNumber;
 
     public String getFirstName() {
         return firstName;
@@ -13,14 +13,6 @@ public class Contact {
         this.firstName = firstName;
     }
 
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
     public String getLastName() {
         return lastName;
     }
@@ -28,4 +20,5 @@ public class Contact {
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
+
 }
