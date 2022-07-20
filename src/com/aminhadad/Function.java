@@ -7,9 +7,11 @@ public class Function {
 
     public void create(){
       Contact contact =new Contact();
-      System.out.println("PLZ enter contact name");
+      System.out.println("PLZ enter first name");
       contact.setFirstName(scanner.nextLine());
-      PhoneNumber phoneNumber=new PhoneNumber();
+        System.out.println("PLZ enter last name");
+        contact.setLastName(scanner.nextLine());
+        PhoneNumber phoneNumber=new PhoneNumber();
       System.out.println("PLZ enter type of number\n[home =1,work =2 ,other =3,phone =4]");
       int type=scanner.nextInt();
        switch (type){
@@ -26,7 +28,6 @@ public class Function {
                phoneNumber.setNumberType(PhoneNumber.NumberType.phone);
                break;
        }
-
       System.out.println("PLZ enter contact number");
       phoneNumber.setNumber(scanner.next());
       contactList.add(contact);
@@ -35,7 +36,7 @@ public class Function {
     public void delete(){}
     public void read(){
         Object data=searchByName();
-        System.out.println(data.toString());
+        System.out.println(data);
 
     }
     public void update(){}
