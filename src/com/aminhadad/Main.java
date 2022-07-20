@@ -1,5 +1,4 @@
 package com.aminhadad;
-
 import java.util.Scanner;
 public class Main {
 public static Scanner scanner=new Scanner(System.in);
