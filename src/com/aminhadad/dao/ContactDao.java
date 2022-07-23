@@ -1,14 +1,13 @@
 package com.aminhadad.dao;
 
 import com.aminhadad.Contact;
-
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
 
 public class ContactDao {
     public void createDataBase() throws SQLException {
-        String createQuery="create table contact ((ID INT PRIMARY KEY,firstName VARCHAR(255),lastName VARCHAR(255),id INT)";
+        String createQuery="create table contact (ID INT PRIMARY KEY,firstName VARCHAR(255),lastName VARCHAR(255),id INT)";
         Statement createStatement= H2JDBCUtils.getConnection().createStatement();
         createStatement.execute(createQuery);
     }
@@ -29,5 +28,4 @@ public class ContactDao {
     public List<Contact> selectAll(){
         return null;
     }
-
 }
