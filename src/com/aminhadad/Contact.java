@@ -1,6 +1,6 @@
 package com.aminhadad;
 
-public class Contact  {
+public class Contact extends Entity {
     private String firstName;
     private String lastName;
     private PhoneNumber phoneNumber;
