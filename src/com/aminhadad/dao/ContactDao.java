@@ -38,8 +38,8 @@ public class ContactDao {
         try (Connection connection = H2JDBCUtils.getConnection();
              // Step 2:Create a statement using connection object
              PreparedStatement preparedStatement = connection.prepareStatement(INSERT_CONTACTS_SQL)) {
-            int idcounter=1;
-            preparedStatement.setInt(1, idcounter++);
+            int idcounter=2;
+            preparedStatement.setInt(1, ++idcounter);
             System.out.println("PLZ Enter first name");
             String firstName=scanner.nextLine();
             preparedStatement.setString(2, firstName);
@@ -108,19 +108,20 @@ public class ContactDao {
 
              // Step 2:Create a statement using connection object
              PreparedStatement preparedStatement = connection.prepareStatement(QUERY);) {
-            preparedStatement.setInt(1, 2);
+            System.out.println("enter id");
+            int id=scanner.nextInt();
+            preparedStatement.setInt(1,id);
             System.out.println(preparedStatement);
             // Step 3: Execute the query or update query
             ResultSet rs = preparedStatement.executeQuery();
 
             // Step 4: Process the ResultSet object.
             while (rs.next()) {
-                int id = rs.getInt("id");
-                String name = rs.getString("name");
-                String email = rs.getString("email");
-                String country = rs.getString("country");
-                String password = rs.getString("password");
-                System.out.println(id + "," + name + "," + email + "," + country + "," + password);
+                int ID = rs.getInt("ID");
+                String FIRSTNAME = rs.getString("FIRSTNAME");
+                String LASTTNAME = rs.getString("LASTNAME");
+            //
+                System.out.println(ID + "," + FIRSTNAME + "," + LASTTNAME );
             }
         } catch (SQLException e) {
             H2JDBCUtils.printSQLException(e);
