@@ -41,7 +41,7 @@ public class Function {
     }
     public void update(){}
     public void showMenu(){
-        System.out.println("1-Create Contact\n2-Show Contact\n3-Update Contact\n4-Delete Contact\n5-Exit\n");
+        System.out.println("1-Create Table\n2-Insert Contact\n3-Show Contact\n4-update Contact\n5-delete Contact\n6-Exit");
         System.out.print("Your Command : ");
     }
     public Object searchByName(){

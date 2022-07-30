@@ -1,4 +1,6 @@
-package com.aminhadad.dao;
+package com.aminhadad.other;
+
+import com.aminhadad.dao.H2JDBCUtils;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -7,8 +9,10 @@ import java.sql.Statement;
 public class CreateExample {
 
     private static final String createTableSQL = "CREATE TABLE CONTACTS (ID  INT PRIMARY KEY NOT NULL ," +
-            "  FIRSTNAME VARCHAR (20)," + "  LASTNAME VARCHAR(20)," + "  COUNTRY VARCHAR(20)," + "  );";
+            "  FIRSTNAME VARCHAR (20), LASTNAME VARCHAR(20), COUNTRY VARCHAR(20) );";
 
+    private static final String createTablePhoneNumber = "CREATE TABLE PhoneNumber (ID  INT PRIMARY KEY NOT NULL ," +
+            "  number VARCHAR (20), numberType VARCHAR(20), fk_contact INT NOT NULL ,FOREIGN KEY (fk_contact) REFERENCES CONTACTS(ID)"+ "  );";
 
     public static void main(String[] argv) throws SQLException {
         CreateExample createTableExample = new CreateExample();
@@ -25,6 +29,7 @@ public class CreateExample {
 
             // Step 3: Execute the query or update query
             statement.execute(createTableSQL);
+            statement.execute(createTablePhoneNumber);
 
         } catch (SQLException e) {
             // print SQL exception information

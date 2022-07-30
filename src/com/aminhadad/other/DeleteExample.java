@@ -1,4 +1,6 @@
-package com.aminhadad.dao;
+package com.aminhadad.other;
+
+import com.aminhadad.dao.H2JDBCUtils;
 
 import java.sql.Connection;
 import java.sql.SQLException;
