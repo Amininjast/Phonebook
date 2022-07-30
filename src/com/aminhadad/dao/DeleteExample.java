@@ -1,33 +1,31 @@
 package com.aminhadad.dao;
+
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class H2CreateExample {
-
-    private static final String createTableSQL = "create table users (\r\n" + "  id  int(3) primary key,\r\n" +
-            "  name varchar(20),\r\n" + "  email varchar(20),\r\n" + "  country varchar(20),\r\n" +
-            "  password varchar(20)\r\n" + "  );";
+public class DeleteExample {
+    private static final String deleteTableSQL = "delete from users where id = 1";
 
     public static void main(String[] argv) throws SQLException {
-        H2CreateExample createTableExample = new H2CreateExample();
-        createTableExample.createTable();
+        DeleteExample deleteExample = new DeleteExample();
+        deleteExample.deleteRecord();
     }
 
-    public void createTable() throws SQLException {
+    public void deleteRecord() throws SQLException {
 
-        System.out.println(createTableSQL);
+        System.out.println(deleteTableSQL);
         // Step 1: Establishing a Connection
         try (Connection connection = H2JDBCUtils.getConnection();
              // Step 2:Create a statement using connection object
              Statement statement = connection.createStatement();) {
 
             // Step 3: Execute the query or update query
-            statement.execute(createTableSQL);
+            statement.execute(deleteTableSQL);
 
         } catch (SQLException e) {
             // print SQL exception information
-            e.printStackTrace();
+            H2JDBCUtils.printSQLException(e);
         }
     }
 }
