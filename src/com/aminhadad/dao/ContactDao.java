@@ -1,21 +1,17 @@
 package com.aminhadad.dao;
 
-import com.aminhadad.Contact;
-
 import java.sql.*;
-import java.util.List;
 
 public class ContactDao {
 
     private static final String createTableSQL = "CREATE TABLE CONTACTS (ID  INT PRIMARY KEY NOT NULL ," +
-            "  FIRSTNAME VARCHAR (20), LASTNAME VARCHAR(20), COUNTRY VARCHAR(20) );";
-
-    private static final String deleteTableSQL = "delete from users where id = 1";
-    private static final String UPDATE_USERS_SQL = "update users set name = ? where id = ?;";
-    private static final String INSERT_USERS_SQL = "INSERT INTO users" +
-            "  (id, name, email, country, password) VALUES " +
-            " (?, ?, ?, ?, ?);";
-    private static final String QUERY = "select id,name,email,country,password from users where id =?";
+            "  FIRSTNAME VARCHAR (20), LASTNAME VARCHAR(20));";
+    private static final String INSERT_CONTACTS_SQL = "INSERT INTO CONTACTS" +
+            "  (id, firstName, lastName) VALUES " +
+            " (?, ?, ?);";
+    private static final String deleteTableSQL = "delete from CONTACTS where id = 1";
+    private static final String UPDATE_USERS_SQL = "update CONTACTS set name = ? where id = ?;";
+    private static final String QUERY = "select id, firstName, lastName from CONTACTS where id =?";
 
     public void createTable() throws SQLException {
 
@@ -72,16 +68,15 @@ public class ContactDao {
     }
 
     public void insertRecord() throws SQLException {
-        System.out.println(INSERT_USERS_SQL);
+        System.out.println(INSERT_CONTACTS_SQL);
         // Step 1: Establishing a Connection
         try (Connection connection = H2JDBCUtils.getConnection();
              // Step 2:Create a statement using connection object
-             PreparedStatement preparedStatement = connection.prepareStatement(INSERT_USERS_SQL)) {
-            preparedStatement.setInt(1, 2);
+             PreparedStatement preparedStatement = connection.prepareStatement(INSERT_CONTACTS_SQL)) {
+            preparedStatement.setInt(1, 1);
             preparedStatement.setString(2, "Reza");
-            preparedStatement.setString(3, "Amin@gmail.com");
-            preparedStatement.setString(4, "IR");
-            preparedStatement.setString(5, "*****");
+            preparedStatement.setString(3, "Heydari");
+
 
             System.out.println(preparedStatement);
             // Step 3: Execute the query or update query

@@ -6,12 +6,12 @@ import java.util.List;
 public class PhoneNumberDao {
     private static final String createTablePhoneNumber = "CREATE TABLE PhoneNumber (ID  INT PRIMARY KEY NOT NULL ," +
             "  number VARCHAR (20), numberType VARCHAR(20), fk_contact INT NOT NULL ,FOREIGN KEY (fk_contact) REFERENCES CONTACTS(ID)"+ "  );";
-    private static final String deleteTableSQL = "delete from users where id = 1";
-    private static final String UPDATE_USERS_SQL = "update users set name = ? where id = ?;";
-    private static final String INSERT_USERS_SQL = "INSERT INTO users" +
+    private static final String deleteTableSQL = "delete from PhoneNumber where id = 1";
+    private static final String UPDATE_USERS_SQL = "update PhoneNumber set name = ? where id = ?;";
+    private static final String INSERT_USERS_SQL = "INSERT INTO PhoneNumber" +
             "  (id, name, email, country, password) VALUES " +
             " (?, ?, ?, ?, ?);";
-    private static final String QUERY = "select id,name,email,country,password from users where id =?";
+    private static final String QUERY = "select id,name,email,country,password from PhoneNumber where id =?";
     public void createTable() throws SQLException {
 
         System.out.println(createTablePhoneNumber);
