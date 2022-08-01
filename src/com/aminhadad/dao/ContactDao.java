@@ -11,7 +11,7 @@ public class ContactDao {
     private static final String INSERT_CONTACTS_SQL = "INSERT INTO CONTACTS" +
             "  (id, firstName, lastName) VALUES " +
             " (?, ?, ?);";
-    private static final String deleteTableSQL = "delete from CONTACTS where id = 1";
+    private static final String deleteTableSQL = "delete from CONTACTS where ID = ?";
     private static final String updateUsersSQL = "update CONTACTS set FIRSTNAME = ?,LASTNAME = ? where id = ?;";
     private static final String selectQuery = "select id, firstName, lastName from CONTACTS where id =?";
     private static final String selectAll = "select * FROM CONTACTS";
@@ -68,10 +68,13 @@ public class ContactDao {
         // Step 1: Establishing a Connection
         try (Connection connection = H2JDBCUtils.getConnection();
              // Step 2:Create a statement using connection object
-             Statement statement = connection.createStatement();) {
+             PreparedStatement delstatement = connection.prepareStatement(deleteTableSQL);) {
+            System.out.println("PLZ Enter id");
+            int id=scanner.nextInt();
+            delstatement.setInt(1,id);
 
             // Step 3: Execute the query or update query
-            statement.execute(deleteTableSQL);
+            delstatement.execute();
 
         } catch (SQLException e) {
             // print SQL exception information
@@ -105,8 +108,6 @@ public class ContactDao {
 
         // Step 4: try-with-resource statement will auto close the connection.
     }
-
-
 
     public  void selectById() {
 
