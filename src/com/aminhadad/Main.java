@@ -28,7 +28,7 @@ public static Scanner scanner=new Scanner(System.in);
                     contactDao.insertContact();
                     break;
                 case 3:
-                    contactDao.SelectById();
+                    contactDao.selectById();
                     break;
                 case 4:
                     contactDao.updateRecord();
@@ -37,6 +37,9 @@ public static Scanner scanner=new Scanner(System.in);
                     contactDao.deleteRecord();
                     break;
                 case 6:
+                    break;
+                case 7:
+                    contactDao.maxId();
                     break;
 
             }

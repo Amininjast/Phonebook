@@ -12,8 +12,9 @@ public class ContactDao {
             "  (id, firstName, lastName) VALUES " +
             " (?, ?, ?);";
     private static final String deleteTableSQL = "delete from CONTACTS where id = 1";
-    private static final String UPDATE_USERS_SQL = "update CONTACTS set name = ? where id = ?;";
-    private static final String QUERY = "select id, firstName, lastName from CONTACTS where id =?";
+    private static final String updateUsersSQL = "update CONTACTS set name = ? where id = ?;";
+    private static final String selectQuery = "select id, firstName, lastName from CONTACTS where id =?";
+    private static final String maxIdQuery = "SELECT MAX(ID) maxId FROM CONTACTS";
 
     public void createTable() throws SQLException {
 
@@ -78,11 +79,11 @@ public class ContactDao {
     }
 
     public void updateRecord() throws SQLException {
-        System.out.println(UPDATE_USERS_SQL);
+        System.out.println(updateUsersSQL);
         // Step 1: Establishing a Connection
         try (Connection connection = H2JDBCUtils.getConnection();
              // Step 2:Create a statement using connection object
-             PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_USERS_SQL)) {
+             PreparedStatement preparedStatement = connection.prepareStatement(updateUsersSQL)) {
             preparedStatement.setString(1, "Amin");
             preparedStatement.setInt(2, 1);
 
@@ -99,7 +100,7 @@ public class ContactDao {
 
 
 
-    public  void SelectById() {
+    public  void selectById() {
 
         // using try-with-resources to avoid closing resources (boiler plate code)
 
@@ -107,7 +108,7 @@ public class ContactDao {
         try (Connection connection = H2JDBCUtils.getConnection();
 
              // Step 2:Create a statement using connection object
-             PreparedStatement preparedStatement = connection.prepareStatement(QUERY);) {
+             PreparedStatement preparedStatement = connection.prepareStatement(selectQuery);) {
             System.out.println("enter id");
             int id=scanner.nextInt();
             preparedStatement.setInt(1,id);
@@ -127,6 +128,20 @@ public class ContactDao {
             H2JDBCUtils.printSQLException(e);
         }
         // Step 4: try-with-resource statement will auto close the connection.
+    }
+
+    public void maxId()throws SQLException{
+        try(Connection connection = H2JDBCUtils.getConnection();
+            PreparedStatement maxIdStatement = connection.prepareStatement(maxIdQuery);) {
+            System.out.println(maxIdQuery);
+            ResultSet resultSet = maxIdStatement.executeQuery();
+            resultSet.next();
+            int id = resultSet.getInt("maxId");
+            System.out.println(id);
+            System.out.println();
+        }catch (SQLException e) {
+            H2JDBCUtils.printSQLException(e);
+        }
     }
 
 }
