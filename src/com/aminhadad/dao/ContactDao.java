@@ -14,6 +14,7 @@ public class ContactDao {
     private static final String deleteTableSQL = "delete from CONTACTS where id = 1";
     private static final String updateUsersSQL = "update CONTACTS set name = ? where id = ?;";
     private static final String selectQuery = "select id, firstName, lastName from CONTACTS where id =?";
+    private static final String selectAll = "select * FROM CONTACTS";
     private static final String maxIdQuery = "SELECT MAX(ID) maxId FROM CONTACTS";
 
     public void createTable() throws SQLException {
@@ -123,6 +124,34 @@ public class ContactDao {
                 String LASTTNAME = rs.getString("LASTNAME");
             //
                 System.out.println(ID + "," + FIRSTNAME + "," + LASTTNAME );
+            }
+        } catch (SQLException e) {
+            H2JDBCUtils.printSQLException(e);
+        }
+        // Step 4: try-with-resource statement will auto close the connection.
+    }
+
+    public  void selectAll() {
+
+        // using try-with-resources to avoid closing resources (boiler plate code)
+
+        // Step 1: Establishing a Connection
+        try (Connection connection = H2JDBCUtils.getConnection();
+
+             // Step 2:Create a statement using connection object
+             PreparedStatement preparedStatement = connection.prepareStatement(selectAll);) {
+            System.out.println(preparedStatement);
+            // Step 3: Execute the query or update query
+            ResultSet rs = preparedStatement.executeQuery();
+
+            // Step 4: Process the ResultSet object.
+            while (rs.next()) {
+                int ID = rs.getInt("ID");
+                String FIRSTNAME = rs.getString("FIRSTNAME");
+                String LASTTNAME = rs.getString("LASTNAME");
+                //
+                System.out.println(ID + "-" + FIRSTNAME + " " + LASTTNAME );
+                System.out.println();
             }
         } catch (SQLException e) {
             H2JDBCUtils.printSQLException(e);

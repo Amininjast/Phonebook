@@ -9,7 +9,7 @@ import java.sql.SQLException;
 
 
 public class SelectAll {
-    private static final String QUERY = "select * from users ";
+    private static final String QUERY = "select * from Contacts ";
 
     public static void main(String[] args) {
 
@@ -31,7 +31,7 @@ public class SelectAll {
                 String email = rs.getString("email");
                 String country = rs.getString("country");
                 String password = rs.getString("password");
-                System.out.println(id + "," + name + "," + email + "," + country + "," + password);
+                System.out.println(id + "-" + name + "," + email + "," + country + "," + password);
             }
         } catch (SQLException e) {
             H2JDBCUtils.printSQLException(e);

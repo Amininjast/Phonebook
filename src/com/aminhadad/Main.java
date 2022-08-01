@@ -41,6 +41,9 @@ public static Scanner scanner=new Scanner(System.in);
                 case 7:
                     contactDao.maxId();
                     break;
+                case 8:
+                    contactDao.selectAll();
+                    break;
 
             }
         }
