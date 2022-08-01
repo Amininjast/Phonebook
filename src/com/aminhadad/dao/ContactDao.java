@@ -39,7 +39,7 @@ public class ContactDao {
         try (Connection connection = H2JDBCUtils.getConnection();
              // Step 2:Create a statement using connection object
              PreparedStatement preparedStatement = connection.prepareStatement(INSERT_CONTACTS_SQL)) {
-            int idcounter=2;
+            int idcounter=maxId();
             preparedStatement.setInt(1, ++idcounter);
             System.out.println("PLZ Enter first name");
             String firstName=scanner.nextLine();
@@ -130,18 +130,20 @@ public class ContactDao {
         // Step 4: try-with-resource statement will auto close the connection.
     }
 
-    public void maxId()throws SQLException{
-        try(Connection connection = H2JDBCUtils.getConnection();
-            PreparedStatement maxIdStatement = connection.prepareStatement(maxIdQuery);) {
+    public int maxId()throws SQLException {
+        int id = 0;
+        try (Connection connection = H2JDBCUtils.getConnection();
+             PreparedStatement maxIdStatement = connection.prepareStatement(maxIdQuery);) {
             System.out.println(maxIdQuery);
             ResultSet resultSet = maxIdStatement.executeQuery();
             resultSet.next();
-            int id = resultSet.getInt("maxId");
+            id = resultSet.getInt("maxId");
             System.out.println(id);
             System.out.println();
-        }catch (SQLException e) {
+        } catch (SQLException e) {
             H2JDBCUtils.printSQLException(e);
         }
+        return id;
     }
 
 }
