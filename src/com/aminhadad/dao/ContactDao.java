@@ -68,13 +68,13 @@ public class ContactDao {
         // Step 1: Establishing a Connection
         try (Connection connection = H2JDBCUtils.getConnection();
              // Step 2:Create a statement using connection object
-             PreparedStatement delstatement = connection.prepareStatement(deleteTableSQL);) {
+             PreparedStatement deleteStatement = connection.prepareStatement(deleteTableSQL);) {
             System.out.println("PLZ Enter id");
             int id=scanner.nextInt();
-            delstatement.setInt(1,id);
+            deleteStatement.setInt(1,id);
 
             // Step 3: Execute the query or update query
-            delstatement.execute();
+            deleteStatement.execute();
 
         } catch (SQLException e) {
             // print SQL exception information

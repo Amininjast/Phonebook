@@ -15,7 +15,7 @@ public static Scanner scanner=new Scanner(System.in);
         PhoneNumberDao phoneNumberDao=new PhoneNumberDao();
         int selectedMenu=0;
 
-        while (selectedMenu!=6) {
+        while (selectedMenu!=7) {
         System.out.println("Phonebook");
         function.showMenu();
         selectedMenu=scanner.nextInt();
@@ -31,20 +31,16 @@ public static Scanner scanner=new Scanner(System.in);
                     contactDao.selectById();
                     break;
                 case 4:
-                    contactDao.updateRecord();
-                    break;
-                case 5:
-                    contactDao.deleteRecord();
-                    break;
-                case 6:
-                    break;
-                case 7:
-                    contactDao.maxId();
-                    break;
-                case 8:
                     contactDao.selectAll();
                     break;
-
+                case 5:
+                    contactDao.updateRecord();
+                    break;
+                case 6:
+                    contactDao.deleteRecord();
+                    break;
+                case 7:
+                    break;
             }
         }
     }
