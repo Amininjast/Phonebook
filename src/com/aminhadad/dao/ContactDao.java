@@ -12,7 +12,7 @@ public class ContactDao {
             "  (id, firstName, lastName) VALUES " +
             " (?, ?, ?);";
     private static final String deleteTableSQL = "delete from CONTACTS where id = 1";
-    private static final String updateUsersSQL = "update CONTACTS set name = ? where id = ?;";
+    private static final String updateUsersSQL = "update CONTACTS set FIRSTNAME = ?,LASTNAME = ? where id = ?;";
     private static final String selectQuery = "select id, firstName, lastName from CONTACTS where id =?";
     private static final String selectAll = "select * FROM CONTACTS";
     private static final String maxIdQuery = "SELECT MAX(ID) maxId FROM CONTACTS";
@@ -84,12 +84,19 @@ public class ContactDao {
         // Step 1: Establishing a Connection
         try (Connection connection = H2JDBCUtils.getConnection();
              // Step 2:Create a statement using connection object
-             PreparedStatement preparedStatement = connection.prepareStatement(updateUsersSQL)) {
-            preparedStatement.setString(1, "Amin");
-            preparedStatement.setInt(2, 1);
+             PreparedStatement updateUserStatement = connection.prepareStatement(updateUsersSQL)) {
+            System.out.println("PLZ Enter id");
+            int id=scanner.nextInt();
+            updateUserStatement.setInt(3,id);
+            System.out.println("PLZ Enter first name");
+            String firstName=scanner.next();
+            updateUserStatement.setString(1, firstName);
+            System.out.println("PLZ Enter last name");
+            String lastName=scanner.next();
+            updateUserStatement.setString(2, lastName);
 
-            // Step 3: Execute the query or update query
-            preparedStatement.executeUpdate();
+            // Ste8p 3: Execute the query or update query
+            updateUserStatement.execute();
         } catch (SQLException e) {
 
             // print SQL exception information
