@@ -2,16 +2,22 @@ package com.aminhadad.dao;
 
 import java.sql.*;
 import java.util.List;
+import java.util.Scanner;
 
 public class PhoneNumberDao {
-    private static final String createTablePhoneNumber = "CREATE TABLE PhoneNumber (ID  INT PRIMARY KEY NOT NULL ," +
+    Scanner scanner=new Scanner(System.in);
+
+
+    private static final String createTablePhoneNumber = "CREATE TABLE PHONENUMBER (ID  INT PRIMARY KEY NOT NULL ," +
             "  number VARCHAR (20), numberType VARCHAR(20), fk_contact INT NOT NULL ,FOREIGN KEY (fk_contact) REFERENCES CONTACTS(ID)"+ "  );";
-    private static final String deleteTableSQL = "delete from PhoneNumber where id = 1";
-    private static final String UPDATE_USERS_SQL = "update PhoneNumber set name = ? where id = ?;";
-    private static final String INSERT_USERS_SQL = "INSERT INTO PhoneNumber" +
-            "  (id, name, email, country, password) VALUES " +
-            " (?, ?, ?, ?, ?);";
-    private static final String QUERY = "select id,name,email,country,password from PhoneNumber where id =?";
+    private static final String insertPhoneNumberSQL = "INSERT INTO PHONENUMBER" +
+            "  (ID, number, numberType) VALUES (?, ?, ?);";
+    private static final String deleteTableSQL = "delete from PHONENUMBER where ID = ?";
+    private static final String updateUsersSQL = "update PHONENUMBER set FIRSTNAME = ?,LASTNAME = ? where id = ?;";
+    private static final String selectQuery = "select id, firstName, lastName from PHONENUMBER where id =?";
+    private static final String selectAll = "select * FROM PHONENUMBER";
+    private static final String maxIdQuery = "SELECT MAX(ID) maxId FROM PHONENUMBER";
+
     public void createTable() throws SQLException {
 
         System.out.println(createTablePhoneNumber);
@@ -29,21 +35,50 @@ public class PhoneNumberDao {
         }
     }
 
-    public void deleteRecord() throws SQLException {
-
-        System.out.println(deleteTableSQL);
+    public void insertContact() throws SQLException {
+        System.out.println(insertPhoneNumberSQL);
         // Step 1: Establishing a Connection
         try (Connection connection = H2JDBCUtils.getConnection();
              // Step 2:Create a statement using connection object
-             Statement statement = connection.createStatement();) {
+             PreparedStatement preparedStatement = connection.prepareStatement(insertPhoneNumberSQL)) {
+            int idcounter=maxId();
+            preparedStatement.setInt(1, ++idcounter);
+            System.out.println("PLZ Enter first name");
+            String firstName=scanner.nextLine();
+            preparedStatement.setString(2, firstName);
+            System.out.println("PLZ Enter last name");
+            String lastName=scanner.nextLine();
+            preparedStatement.setString(3, lastName);
 
+
+            System.out.println(preparedStatement);
             // Step 3: Execute the query or update query
-            statement.execute(deleteTableSQL);
-
+            preparedStatement.executeUpdate();
         } catch (SQLException e) {
+
             // print SQL exception information
             H2JDBCUtils.printSQLException(e);
         }
+
+        // Step 4: try-with-resource statement will auto close the connection.
+    }
+
+
+
+    public int maxId()throws SQLException {
+        int id = 0;
+        try (Connection connection = H2JDBCUtils.getConnection();
+             PreparedStatement maxIdStatement = connection.prepareStatement(maxIdQuery);) {
+            System.out.println(maxIdQuery);
+            ResultSet resultSet = maxIdStatement.executeQuery();
+            resultSet.next();
+            id = resultSet.getInt("maxId");
+            System.out.println(id);
+            System.out.println();
+        } catch (SQLException e) {
+            H2JDBCUtils.printSQLException(e);
+        }
+        return id;
     }
 
 }
