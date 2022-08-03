@@ -1,7 +1,7 @@
-package com.aminhadad;
+package com.aminhadad.entity;
 
 public class PhoneNumber {
-    enum NumberType{home,work,other,phone}
+    public enum NumberType{home,work,other,phone}
     private String number;
     private NumberType numberType;
 

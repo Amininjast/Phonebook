@@ -1,4 +1,4 @@
-package com.aminhadad;
+package com.aminhadad.entity;
 
 import java.util.ArrayList;
 

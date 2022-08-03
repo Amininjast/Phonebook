@@ -1,7 +1,6 @@
 package com.aminhadad.dao;
 
 import java.sql.*;
-import java.util.List;
 import java.util.Scanner;
 
 public class PhoneNumberDao {
@@ -43,7 +42,24 @@ public class PhoneNumberDao {
              PreparedStatement preparedStatement = connection.prepareStatement(insertPhoneNumberSQL)) {
             int idcounter=maxId();
             preparedStatement.setInt(1, ++idcounter);
-            System.out.println("PLZ Enter first name");
+            System.out.println("PLZ enter type of number\n[home =1,work =2 ,other =3,phone =4]");
+            int type=scanner.nextInt();
+//            switch (type){
+//                case 1:
+//                    phoneNumber.setNumberType(PhoneNumber.NumberType.home);
+//                    break;
+//                case 2:
+//                    phoneNumber.setNumberType(PhoneNumber.NumberType.work);
+//                    break;
+//                case 3:
+//                    phoneNumber.setNumberType(PhoneNumber.NumberType.other);
+//                    break;
+//                case 4:
+//                    phoneNumber.setNumberType(PhoneNumber.NumberType.phone);
+//                    break;
+//            }
+            System.out.println("PLZ enter contact number");
+
             String firstName=scanner.nextLine();
             preparedStatement.setString(2, firstName);
             System.out.println("PLZ Enter last name");

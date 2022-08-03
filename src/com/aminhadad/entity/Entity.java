@@ -1,4 +1,4 @@
-package com.aminhadad;
+package com.aminhadad.entity;
 
 public abstract class Entity {
     int id;
