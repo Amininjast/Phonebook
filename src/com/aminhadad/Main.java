@@ -21,8 +21,8 @@ public static Scanner scanner=new Scanner(System.in);
         selectedMenu=scanner.nextInt();
             switch (selectedMenu) {
                 case 1:
-                    contactDao.createTable();
-                    phoneNumberDao.createTable();
+                    contactDao.createContactTable();
+                    phoneNumberDao.createPhoneNumberTable();
                     break;
                 case 2:
                     contactDao.insertContact();

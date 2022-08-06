@@ -17,7 +17,7 @@ public class ContactDao {
     private static final String selectAll = "select * FROM CONTACTS";
     private static final String maxContacIdQuery = "SELECT MAX(ID) maxId FROM CONTACTS";
 
-    public void createTable() throws SQLException {
+    public void createContactTable() throws SQLException {
 
         System.out.println(createTableSQL);
         // Step 1: Establishing a Connection

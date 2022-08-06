@@ -21,7 +21,7 @@ public class PhoneNumberDao {
     private static final String selectAll = "select * FROM PHONENUMBER";
     private static final String maxPhoneNumberIdQuery = "SELECT MAX(ID) maxId FROM PHONENUMBER";
 
-    public void createTable() throws SQLException {
+    public void createPhoneNumberTable() throws SQLException {
 
         System.out.println(createTablePhoneNumber);
         // Step 1: Establishing a Connection
