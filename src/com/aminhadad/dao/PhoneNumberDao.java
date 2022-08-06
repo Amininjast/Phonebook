@@ -17,7 +17,7 @@ public class PhoneNumberDao {
 
     private static final String deletePhoneNumberQuery = "delete from PHONENUMBER where ID = ?";
     private static final String updatePhoneNumberQuery = "update PHONENUMBER set number = ?,numberType = ? where ID = ?;";
-    private static final String selectQuery = "select id, firstName, lastName from PHONENUMBER where id =?";
+    private static final String selectQuery = "select * from PHONENUMBER where id =?";
     private static final String selectAll = "select * FROM PHONENUMBER";
     private static final String maxPhoneNumberIdQuery = "SELECT MAX(ID) maxId FROM PHONENUMBER";
 
@@ -161,6 +161,37 @@ public class PhoneNumberDao {
 
         // Step 4: try-with-resource statement will auto close the connection.
     }
+
+    public  void selectById() {
+
+        // using try-with-resources to avoid closing resources (boiler plate code)
+
+        // Step 1: Establishing a Connection
+        try (Connection connection = H2JDBCUtils.getConnection();
+
+             // Step 2:Create a statement using connection object
+             PreparedStatement preparedStatement = connection.prepareStatement(selectQuery);) {
+            System.out.println("enter id");
+            int id=scanner.nextInt();
+            preparedStatement.setInt(1,id);
+            System.out.println(preparedStatement);
+            // Step 3: Execute the query or update query
+            ResultSet rs = preparedStatement.executeQuery();
+
+            // Step 4: Process the ResultSet object.
+            while (rs.next()) {
+                int ID = rs.getInt("ID");
+                String number = rs.getString("number");
+                String numberType = rs.getString("numberType");
+                //
+                System.out.println(ID + "," + number + "," + numberType );
+            }
+        } catch (SQLException e) {
+            H2JDBCUtils.printSQLException(e);
+        }
+        // Step 4: try-with-resource statement will auto close the connection.
+    }
+
 
 
 
