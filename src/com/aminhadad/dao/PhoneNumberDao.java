@@ -15,8 +15,8 @@ public class PhoneNumberDao {
     private static final String insertPhoneNumberSQL = "INSERT INTO PHONENUMBER" +
             "  (ID, number, numberType,fk_contact) VALUES (?, ?, ?,?);";
 
-    private static final String deleteTableSQL = "delete from PHONENUMBER where ID = ?";
-    private static final String updateUsersSQL = "update PHONENUMBER set FIRSTNAME = ?,LASTNAME = ? where id = ?;";
+    private static final String deletePhoneNumberQuery = "delete from PHONENUMBER where ID = ?";
+    private static final String updatePhoneNumberQuery = "update PHONENUMBER set number = ?,numberType = ? where ID = ?;";
     private static final String selectQuery = "select id, firstName, lastName from PHONENUMBER where id =?";
     private static final String selectAll = "select * FROM PHONENUMBER";
     private static final String maxPhoneNumberIdQuery = "SELECT MAX(ID) maxId FROM PHONENUMBER";
@@ -91,6 +91,77 @@ public class PhoneNumberDao {
 
         // Step 4: try-with-resource statement will auto close the connection.
     }
+
+    public void deleteRecord() throws SQLException {
+
+        System.out.println(deletePhoneNumberQuery);
+        // Step 1: Establishing a Connection
+        try (Connection connection = H2JDBCUtils.getConnection();
+             // Step 2:Create a statement using connection object
+             PreparedStatement deleteStatement = connection.prepareStatement(deletePhoneNumberQuery);) {
+            System.out.println("PLZ Enter id");
+            int id=scanner.nextInt();
+            deleteStatement.setInt(1,id);
+
+            // Step 3: Execute the query or update query
+            deleteStatement.execute();
+
+        } catch (SQLException e) {
+            // print SQL exception information
+            H2JDBCUtils.printSQLException(e);
+        }
+    }
+
+    public void updateRecord() throws SQLException {
+        System.out.println(updatePhoneNumberQuery);
+        // Step 1: Establishing a Connection
+        try (Connection connection = H2JDBCUtils.getConnection();
+             // Step 2:Create a statement using connection object
+             PreparedStatement updateUserStatement = connection.prepareStatement(updatePhoneNumberQuery)) {
+            System.out.println("PLZ Enter id");
+            int id=scanner.nextInt();
+            updateUserStatement.setInt(3,id);
+            String contactNumber;
+            System.out.println("PLZ enter contact number");
+            contactNumber=scanner.nextLine();
+            updateUserStatement.setString(1, contactNumber);
+            System.out.println("PLZ enter type of number\n[home =1,work =2 ,other =3,phone =4]");
+            PhoneNumber phoneNumber=new PhoneNumber();
+            int type=scanner.nextInt();
+            switch (type){
+                case 1:
+//                    phoneNumber.setNumberType(PhoneNumber.NumberType.home);
+                    updateUserStatement.setString(2, "home");
+
+                    break;
+                case 2:
+//                    phoneNumber.setNumberType(PhoneNumber.NumberType.work);
+                    updateUserStatement.setString(2, "work");
+
+                    break;
+                case 3:
+//                    phoneNumber.setNumberType(PhoneNumber.NumberType.other);
+                    updateUserStatement.setString(2, "other");
+
+                    break;
+                case 4:
+//                    phoneNumber.setNumberType(PhoneNumber.NumberType.phone);                    preparedStatement.setString(3, "home");
+                    updateUserStatement.setString(2, "phone");
+
+                    break;
+            }
+
+            // Ste8p 3: Execute the query or update query
+            updateUserStatement.execute();
+        } catch (SQLException e) {
+
+            // print SQL exception information
+            H2JDBCUtils.printSQLException(e);
+        }
+
+        // Step 4: try-with-resource statement will auto close the connection.
+    }
+
 
 
 
