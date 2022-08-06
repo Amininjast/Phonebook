@@ -192,6 +192,33 @@ public class PhoneNumberDao {
         // Step 4: try-with-resource statement will auto close the connection.
     }
 
+    public  void selectAll() {
+
+        // using try-with-resources to avoid closing resources (boiler plate code)
+
+        // Step 1: Establishing a Connection
+        try (Connection connection = H2JDBCUtils.getConnection();
+
+             // Step 2:Create a statement using connection object
+             PreparedStatement preparedStatement = connection.prepareStatement(selectAll);) {
+            System.out.println(preparedStatement);
+            // Step 3: Execute the query or update query
+            ResultSet rs = preparedStatement.executeQuery();
+
+            // Step 4: Process the ResultSet object.
+            while (rs.next()) {
+                int ID = rs.getInt("ID");
+                String number = rs.getString("number");
+                String numberType = rs.getString("numberType");
+                //
+                System.out.println(ID + "-" + number + " " + numberType );
+                System.out.println();
+            }
+        } catch (SQLException e) {
+            H2JDBCUtils.printSQLException(e);
+        }
+        // Step 4: try-with-resource statement will auto close the connection.
+    }
 
 
 
