@@ -13,13 +13,13 @@ public class PhoneNumberDao {
             "  number VARCHAR (20), numberType VARCHAR(20), fk_contact INT NOT NULL ,FOREIGN KEY (fk_contact) REFERENCES CONTACTS(ID)"+ "  );";
 
     private static final String insertPhoneNumberSQL = "INSERT INTO PHONENUMBER" +
-            "  (ID, number, numberType, fk_contact) VALUES (?, ?, ?, ?);";
+            "  (ID, number, numberType,fk_contact) VALUES (?, ?, ?,?);";
 
     private static final String deleteTableSQL = "delete from PHONENUMBER where ID = ?";
     private static final String updateUsersSQL = "update PHONENUMBER set FIRSTNAME = ?,LASTNAME = ? where id = ?;";
     private static final String selectQuery = "select id, firstName, lastName from PHONENUMBER where id =?";
     private static final String selectAll = "select * FROM PHONENUMBER";
-    private static final String maxIdQuery = "SELECT MAX(ID) maxId FROM PHONENUMBER";
+    private static final String maxPhoneNumberIdQuery = "SELECT MAX(ID) maxId FROM PHONENUMBER";
 
     public void createTable() throws SQLException {
 
@@ -44,8 +44,8 @@ public class PhoneNumberDao {
         try (Connection connection = H2JDBCUtils.getConnection();
              // Step 2:Create a statement using connection object
              PreparedStatement preparedStatement = connection.prepareStatement(insertPhoneNumberSQL)) {
-            int idcounter=maxId();
-            preparedStatement.setInt(1, ++idcounter);
+            int phoneNumberIdCounter= maxPhoneNumberId();
+            preparedStatement.setInt(1, ++phoneNumberIdCounter);
             String contactNumber;
             System.out.println("PLZ enter contact number");
             contactNumber=scanner.nextLine();
@@ -75,8 +75,9 @@ public class PhoneNumberDao {
 
                     break;
             }
-            int xidcounter=idcounter-1;
-            preparedStatement.setInt(4, xidcounter);
+            ContactDao contactDao=new ContactDao();
+            int contacId=contactDao.maxContacId();
+            preparedStatement.setInt(4, contacId);
 
 
             System.out.println(preparedStatement);
@@ -93,11 +94,11 @@ public class PhoneNumberDao {
 
 
 
-    public int maxId()throws SQLException {
+    public int maxPhoneNumberId()throws SQLException {
         int id = 0;
         try (Connection connection = H2JDBCUtils.getConnection();
-             PreparedStatement maxIdStatement = connection.prepareStatement(maxIdQuery);) {
-            System.out.println(maxIdQuery);
+             PreparedStatement maxIdStatement = connection.prepareStatement(maxPhoneNumberIdQuery);) {
+            System.out.println(maxPhoneNumberIdQuery);
             ResultSet resultSet = maxIdStatement.executeQuery();
             resultSet.next();
             id = resultSet.getInt("maxId");
