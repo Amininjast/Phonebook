@@ -26,7 +26,7 @@ public static Scanner scanner=new Scanner(System.in);
                     break;
                 case 2:
                     contactDao.insertContact();
-                    phoneNumberDao.insertContact();
+                    phoneNumberDao.insertPhoneNumber();
                     break;
                 case 3:
                     contactDao.selectById();

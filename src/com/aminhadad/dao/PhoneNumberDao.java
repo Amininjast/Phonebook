@@ -38,7 +38,7 @@ public class PhoneNumberDao {
         }
     }
 
-    public void insertContact() throws SQLException {
+    public void insertPhoneNumber() throws SQLException {
         System.out.println(insertPhoneNumberSQL);
         // Step 1: Establishing a Connection
         try (Connection connection = H2JDBCUtils.getConnection();
@@ -219,9 +219,6 @@ public class PhoneNumberDao {
         }
         // Step 4: try-with-resource statement will auto close the connection.
     }
-
-
-
 
     public int maxPhoneNumberId()throws SQLException {
         int id = 0;
