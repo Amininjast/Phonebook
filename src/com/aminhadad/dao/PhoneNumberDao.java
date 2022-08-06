@@ -1,5 +1,7 @@
 package com.aminhadad.dao;
 
+import com.aminhadad.entity.PhoneNumber;
+
 import java.sql.*;
 import java.util.Scanner;
 
@@ -9,8 +11,10 @@ public class PhoneNumberDao {
 
     private static final String createTablePhoneNumber = "CREATE TABLE PHONENUMBER (ID  INT PRIMARY KEY NOT NULL ," +
             "  number VARCHAR (20), numberType VARCHAR(20), fk_contact INT NOT NULL ,FOREIGN KEY (fk_contact) REFERENCES CONTACTS(ID)"+ "  );";
+
     private static final String insertPhoneNumberSQL = "INSERT INTO PHONENUMBER" +
-            "  (ID, number, numberType) VALUES (?, ?, ?);";
+            "  (ID, number, numberType, fk_contact) VALUES (?, ?, ?, ?);";
+
     private static final String deleteTableSQL = "delete from PHONENUMBER where ID = ?";
     private static final String updateUsersSQL = "update PHONENUMBER set FIRSTNAME = ?,LASTNAME = ? where id = ?;";
     private static final String selectQuery = "select id, firstName, lastName from PHONENUMBER where id =?";
@@ -42,29 +46,37 @@ public class PhoneNumberDao {
              PreparedStatement preparedStatement = connection.prepareStatement(insertPhoneNumberSQL)) {
             int idcounter=maxId();
             preparedStatement.setInt(1, ++idcounter);
-            System.out.println("PLZ enter type of number\n[home =1,work =2 ,other =3,phone =4]");
-            int type=scanner.nextInt();
-//            switch (type){
-//                case 1:
-//                    phoneNumber.setNumberType(PhoneNumber.NumberType.home);
-//                    break;
-//                case 2:
-//                    phoneNumber.setNumberType(PhoneNumber.NumberType.work);
-//                    break;
-//                case 3:
-//                    phoneNumber.setNumberType(PhoneNumber.NumberType.other);
-//                    break;
-//                case 4:
-//                    phoneNumber.setNumberType(PhoneNumber.NumberType.phone);
-//                    break;
-//            }
+            String contactNumber;
             System.out.println("PLZ enter contact number");
+            contactNumber=scanner.nextLine();
+            preparedStatement.setString(2, contactNumber);
+            System.out.println("PLZ enter type of number\n[home =1,work =2 ,other =3,phone =4]");
+            PhoneNumber phoneNumber=new PhoneNumber();
+            int type=scanner.nextInt();
+            switch (type){
+                case 1:
+//                    phoneNumber.setNumberType(PhoneNumber.NumberType.home);
+                    preparedStatement.setString(3, "home");
 
-            String firstName=scanner.nextLine();
-            preparedStatement.setString(2, firstName);
-            System.out.println("PLZ Enter last name");
-            String lastName=scanner.nextLine();
-            preparedStatement.setString(3, lastName);
+                    break;
+                case 2:
+//                    phoneNumber.setNumberType(PhoneNumber.NumberType.work);
+                    preparedStatement.setString(3, "work");
+
+                    break;
+                case 3:
+//                    phoneNumber.setNumberType(PhoneNumber.NumberType.other);
+                    preparedStatement.setString(3, "other");
+
+                    break;
+                case 4:
+//                    phoneNumber.setNumberType(PhoneNumber.NumberType.phone);                    preparedStatement.setString(3, "home");
+                    preparedStatement.setString(3, "phone");
+
+                    break;
+            }
+            int xidcounter=idcounter-1;
+            preparedStatement.setInt(4, xidcounter);
 
 
             System.out.println(preparedStatement);

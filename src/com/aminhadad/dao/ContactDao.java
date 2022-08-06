@@ -8,7 +8,7 @@ public class ContactDao {
 
     private static final String createTableSQL = "CREATE TABLE CONTACTS (ID  INT PRIMARY KEY NOT NULL ," +
             "  FIRSTNAME VARCHAR (20), LASTNAME VARCHAR(20));";
-    private static final String INSERT_CONTACTS_SQL = "INSERT INTO CONTACTS" +
+    private static final String insertContactsSql = "INSERT INTO CONTACTS" +
             "  (id, firstName, lastName) VALUES " +
             " (?, ?, ?);";
     private static final String deleteTableSQL = "delete from CONTACTS where ID = ?";
@@ -35,11 +35,11 @@ public class ContactDao {
     }
 
     public void insertContact() throws SQLException {
-        System.out.println(INSERT_CONTACTS_SQL);
+        System.out.println(insertContactsSql);
         // Step 1: Establishing a Connection
         try (Connection connection = H2JDBCUtils.getConnection();
              // Step 2:Create a statement using connection object
-             PreparedStatement preparedStatement = connection.prepareStatement(INSERT_CONTACTS_SQL)) {
+             PreparedStatement preparedStatement = connection.prepareStatement(insertContactsSql)) {
             int idcounter=maxId();
             preparedStatement.setInt(1, ++idcounter);
             System.out.println("PLZ Enter first name");
