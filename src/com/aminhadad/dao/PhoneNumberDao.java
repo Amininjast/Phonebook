@@ -46,9 +46,8 @@ public class PhoneNumberDao {
              PreparedStatement preparedStatement = connection.prepareStatement(insertPhoneNumberSQL)) {
             int phoneNumberIdCounter= maxPhoneNumberId();
             preparedStatement.setInt(1, ++phoneNumberIdCounter);
-            String contactNumber;
             System.out.println("PLZ enter contact number");
-            contactNumber=scanner.nextLine();
+            String contactNumber=scanner.next();
             preparedStatement.setString(2, contactNumber);
             System.out.println("PLZ enter type of number\n[home =1,work =2 ,other =3,phone =4]");
             PhoneNumber phoneNumber=new PhoneNumber();
