@@ -19,7 +19,6 @@ public class ContactDao {
 
     public void createContactTable() throws SQLException {
 
-        System.out.println(createTableSQL);
         // Step 1: Establishing a Connection
         try (Connection connection = H2JDBCUtils.getConnection();
              // Step 2:Create a statement using connection object
@@ -35,7 +34,6 @@ public class ContactDao {
     }
 
     public void insertContact() throws SQLException {
-        System.out.println(insertContactsSql);
         // Step 1: Establishing a Connection
         try (Connection connection = H2JDBCUtils.getConnection();
              // Step 2:Create a statement using connection object
@@ -63,8 +61,6 @@ public class ContactDao {
     }
 
     public void deleteRecord() throws SQLException {
-
-        System.out.println(deleteTableSQL);
         // Step 1: Establishing a Connection
         try (Connection connection = H2JDBCUtils.getConnection();
              // Step 2:Create a statement using connection object
@@ -83,7 +79,6 @@ public class ContactDao {
     }
 
     public void updateRecord() throws SQLException {
-        System.out.println(updateUsersSQL);
         // Step 1: Establishing a Connection
         try (Connection connection = H2JDBCUtils.getConnection();
              // Step 2:Create a statement using connection object
@@ -121,7 +116,6 @@ public class ContactDao {
             System.out.println("enter id");
             int id=scanner.nextInt();
             preparedStatement.setInt(1,id);
-            System.out.println(preparedStatement);
             // Step 3: Execute the query or update query
             ResultSet rs = preparedStatement.executeQuery();
 
@@ -149,7 +143,6 @@ public class ContactDao {
 
              // Step 2:Create a statement using connection object
              PreparedStatement preparedStatement = connection.prepareStatement(selectAll);) {
-            System.out.println(preparedStatement);
             // Step 3: Execute the query or update query
             ResultSet rs = preparedStatement.executeQuery();
 
@@ -172,7 +165,6 @@ public class ContactDao {
         int id = 0;
         try (Connection connection = H2JDBCUtils.getConnection();
              PreparedStatement maxIdStatement = connection.prepareStatement(maxContacIdQuery);) {
-            System.out.println(maxContacIdQuery);
             ResultSet resultSet = maxIdStatement.executeQuery();
             resultSet.next();
             id = resultSet.getInt("maxId");
