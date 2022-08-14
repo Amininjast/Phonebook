@@ -15,7 +15,7 @@ public static Scanner scanner=new Scanner(System.in);
         PhoneNumberDao phoneNumberDao=new PhoneNumberDao();
         int selectedMenu=0;
         int id=0;
-        while (selectedMenu!=11) {
+        while (selectedMenu!=12) {
         System.out.println("Phonebook");
         function.showMenu();
         selectedMenu=scanner.nextInt();
