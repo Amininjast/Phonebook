@@ -49,7 +49,7 @@ public class PhoneNumberDao {
             System.out.println("PLZ enter contact number");
             String contactNumber=scanner.next();
             preparedStatement.setString(2, contactNumber);
-            System.out.println("PLZ enter type of number\n[home =1,work =2 ,other =3,phone =4]");
+            System.out.println("PLZ enter type of number\n[1=home , 2=work , 3=other , 4=phone]");
             PhoneNumber phoneNumber=new PhoneNumber();
             int type=scanner.nextInt();
             switch (type){
