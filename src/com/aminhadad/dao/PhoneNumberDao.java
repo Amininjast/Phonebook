@@ -66,9 +66,6 @@ public class PhoneNumberDao {
             System.out.println("enter id of contact");
             int contacId=scanner.nextInt();
             preparedStatement.setInt(4, contacId);
-
-
-            System.out.println(preparedStatement);
             // Step 3: Execute the query or update query
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
@@ -108,9 +105,6 @@ public class PhoneNumberDao {
             }
             int contacId=a;
             preparedStatement.setInt(4, contacId);
-
-
-            System.out.println(preparedStatement);
             // Step 3: Execute the query or update query
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
