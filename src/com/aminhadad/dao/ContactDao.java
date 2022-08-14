@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 public class ContactDao {
     Scanner scanner=new Scanner(System.in);
-
+    PhoneNumberDao phoneNumberDao=new PhoneNumberDao();
     private static final String createTableSQL = "CREATE TABLE CONTACTS (ID  INT PRIMARY KEY NOT NULL ," +
             "  FIRSTNAME VARCHAR (20), LASTNAME VARCHAR(20));";
     private static final String insertContactsSql = "INSERT INTO CONTACTS" +
@@ -43,10 +43,10 @@ public class ContactDao {
             int contacIdCouner= maxContacId();
             preparedStatement.setInt(1, ++contacIdCouner);
             System.out.println("PLZ Enter first name");
-            String firstName=scanner.nextLine();
+            String firstName=scanner.next();
             preparedStatement.setString(2, firstName);
             System.out.println("PLZ Enter last name");
-            String lastName=scanner.nextLine();
+            String lastName=scanner.next();
             preparedStatement.setString(3, lastName);
 
 
@@ -132,6 +132,7 @@ public class ContactDao {
                 String LASTTNAME = rs.getString("LASTNAME");
             //
                 System.out.println(ID + "," + FIRSTNAME + "," + LASTTNAME );
+                phoneNumberDao.selectById(id);
             }
         } catch (SQLException e) {
             H2JDBCUtils.printSQLException(e);

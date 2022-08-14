@@ -43,21 +43,21 @@ public static Scanner scanner=new Scanner(System.in);
                     contactDao.deleteRecord();
                     break;
                 case 7:
-                    phoneNumberDao.selectById();
+                    phoneNumberDao.insertPhoneNumber();
                     break;
                 case 8:
-                    phoneNumberDao.selectAll();
+                    phoneNumberDao.selectById();
                     break;
                 case 9:
-                    phoneNumberDao.updateRecord();
+                    phoneNumberDao.selectAll();
                     break;
                 case 10:
-                    phoneNumberDao.deleteRecord();
+                    phoneNumberDao.updateRecord();
                     break;
                 case 11:
+                    phoneNumberDao.deleteRecord();
                     break;
                 case 12:
-                    phoneNumberDao.insertPhoneNumber();
                     break;
             }
         }

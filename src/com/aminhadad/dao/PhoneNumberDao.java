@@ -54,24 +54,16 @@ public class PhoneNumberDao {
             int type=scanner.nextInt();
             switch (type){
                 case 1:
-//                    phoneNumber.setNumberType(PhoneNumber.NumberType.home);
                     preparedStatement.setString(3, "home");
-
                     break;
                 case 2:
-//                    phoneNumber.setNumberType(PhoneNumber.NumberType.work);
                     preparedStatement.setString(3, "work");
-
                     break;
                 case 3:
-//                    phoneNumber.setNumberType(PhoneNumber.NumberType.other);
                     preparedStatement.setString(3, "other");
-
                     break;
                 case 4:
-//                    phoneNumber.setNumberType(PhoneNumber.NumberType.phone);                    preparedStatement.setString(3, "home");
                     preparedStatement.setString(3, "phone");
-
                     break;
             }
             ContactDao contactDao=new ContactDao();
