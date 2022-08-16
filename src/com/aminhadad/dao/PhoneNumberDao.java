@@ -109,7 +109,7 @@ public class PhoneNumberDao {
             updateUserStatement.setInt(3,id);
             String contactNumber;
             System.out.println("PLZ enter contact number");
-            contactNumber=scanner.nextLine();
+            contactNumber=scanner.next();
             updateUserStatement.setString(1, contactNumber);
             System.out.println("PLZ enter type of number\n[home =1,work =2 ,other =3,phone =4]");
             PhoneNumber phoneNumber=new PhoneNumber();
