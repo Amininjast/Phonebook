@@ -11,8 +11,9 @@ public static Scanner scanner=new Scanner(System.in);
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
         H2JDBCUtils dao=new H2JDBCUtils();
         Function function=new Function();
-        ContactDao contactDao=new ContactDao();
-        PhoneNumberDao phoneNumberDao=new PhoneNumberDao();
+//        ContactDao contactDao=new ContactDao();
+//        PhoneNumberDao phoneNumberDao=new PhoneNumberDao();
+          Servis servis=new Servis();
         int selectedMenu=0;
         int id=0;
         while (selectedMenu!=12) {
@@ -21,41 +22,41 @@ public static Scanner scanner=new Scanner(System.in);
         selectedMenu=scanner.nextInt();
             switch (selectedMenu) {
                 case 1:
-                    contactDao.createContactTable();
-                    phoneNumberDao.createPhoneNumberTable();
+                    servis.contactDao.createContactTable();
+                    servis.phoneNumberDao.createPhoneNumberTable();
                     break;
                 case 2:
-                    contactDao.insertContact();
-                    phoneNumberDao.insertPhoneNumber(contactDao.maxContacId());
+                    servis.contactDao.insertContact();
+                    servis.phoneNumberDao.insertPhoneNumber(servis.contactDao.maxContacId());
                     break;
                 case 3:
-                    contactDao.selectById();
-                    phoneNumberDao.selectById(id);
+                    servis.contactDao.selectById();
+                    servis.phoneNumberDao.selectById(id);
                     break;
                 case 4:
-                    contactDao.selectAll();
-                    phoneNumberDao.selectAll();
+                    servis.contactDao.selectAll();
+                    servis.phoneNumberDao.selectAll();
                     break;
                 case 5:
-                    contactDao.updateRecord();
+                    servis.contactDao.updateRecord();
                     break;
                 case 6:
-                    contactDao.deleteRecord();
+                    servis.contactDao.deleteRecord();
                     break;
                 case 7:
-                    phoneNumberDao.insertPhoneNumber();
+                    servis.phoneNumberDao.insertPhoneNumber();
                     break;
                 case 8:
-                    phoneNumberDao.selectById();
+                    servis.phoneNumberDao.selectById();
                     break;
                 case 9:
-                    phoneNumberDao.selectAll();
+                    servis.phoneNumberDao.selectAll();
                     break;
                 case 10:
-                    phoneNumberDao.updateRecord();
+                    servis.phoneNumberDao.updateRecord();
                     break;
                 case 11:
-                    phoneNumberDao.deleteRecord();
+                    servis.phoneNumberDao.deleteRecord();
                     break;
                 case 12:
                     break;
