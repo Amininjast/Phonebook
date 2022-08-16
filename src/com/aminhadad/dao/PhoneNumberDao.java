@@ -101,6 +101,16 @@ public class PhoneNumberDao {
             H2JDBCUtils.printSQLException(e);
         }
     }
+    public void deleteRecord(int id) throws SQLException {
+        try (Connection connection = H2JDBCUtils.getConnection();
+             PreparedStatement deleteStatement = connection.prepareStatement(deletePhoneNumberQuery);) {
+            deleteStatement.setInt(1,id);
+            deleteStatement.execute();
+        } catch (SQLException e) {
+            H2JDBCUtils.printSQLException(e);
+        }
+    }
+
     public void updateRecord() throws SQLException {
         try (Connection connection = H2JDBCUtils.getConnection();
              PreparedStatement updateUserStatement = connection.prepareStatement(updatePhoneNumberQuery)) {
@@ -133,6 +143,39 @@ public class PhoneNumberDao {
             H2JDBCUtils.printSQLException(e);
         }
     }
+    public void updateRecord(int id) throws SQLException {
+        try (Connection connection = H2JDBCUtils.getConnection();
+             PreparedStatement updateUserStatement = connection.prepareStatement(updatePhoneNumberQuery)) {
+//            System.out.println("PLZ Enter id");
+//            int id=scanner.nextInt();
+            updateUserStatement.setInt(3,id);
+//            String contactNumber;
+//            System.out.println("PLZ enter contact number");
+//            contactNumber=scanner.next();
+            updateUserStatement.setString(1, contactNumber);
+            System.out.println("PLZ enter type of number\n[home =1,work =2 ,other =3,phone =4]");
+            PhoneNumber phoneNumber=new PhoneNumber();
+            int type=scanner.nextInt();
+            switch (type){
+                case 1:
+                    updateUserStatement.setString(2, "home");
+                    break;
+                case 2:
+                    updateUserStatement.setString(2, "work");
+                    break;
+                case 3:
+                    updateUserStatement.setString(2, "other");
+                    break;
+                case 4:
+                    updateUserStatement.setString(2, "phone");
+                    break;
+            }
+            updateUserStatement.execute();
+        } catch (SQLException e) {
+            H2JDBCUtils.printSQLException(e);
+        }
+    }
+
     public  void selectById() {
         try (Connection connection = H2JDBCUtils.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(selectQuery);) {
