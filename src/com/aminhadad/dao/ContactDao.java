@@ -19,7 +19,7 @@ public class ContactDao {
     private static final String selectAll = "select * FROM CONTACTS";
     private static final String maxContacIdQuery = "SELECT MAX(ID) maxId FROM CONTACTS";
 
-    public void createContactTable() throws SQLException {
+    public void createContactTable() throws SQLException  {
         try (Connection connection = H2JDBCUtils.getConnection();
              Statement statement = connection.createStatement();) {
             statement.execute(createTableSQL);
@@ -101,7 +101,7 @@ public class ContactDao {
 
         // Step 4: try-with-resource statement will auto close the connection.
     }
-    public void updateRecord(int id) throws SQLException {
+    public void updateRecord(int id,String firstName,String lastName) throws SQLException {
         try (Connection connection = H2JDBCUtils.getConnection();
              PreparedStatement updateUserStatement = connection.prepareStatement(updateUsersSQL)) {
             updateUserStatement.setInt(3,id);

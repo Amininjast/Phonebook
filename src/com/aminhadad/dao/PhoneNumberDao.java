@@ -110,7 +110,6 @@ public class PhoneNumberDao {
             H2JDBCUtils.printSQLException(e);
         }
     }
-
     public void updateRecord() throws SQLException {
         try (Connection connection = H2JDBCUtils.getConnection();
              PreparedStatement updateUserStatement = connection.prepareStatement(updatePhoneNumberQuery)) {
@@ -143,19 +142,14 @@ public class PhoneNumberDao {
             H2JDBCUtils.printSQLException(e);
         }
     }
-    public void updateRecord(int id) throws SQLException {
+    public void updateRecord(int id,String contactNumber,int type) throws SQLException {
         try (Connection connection = H2JDBCUtils.getConnection();
              PreparedStatement updateUserStatement = connection.prepareStatement(updatePhoneNumberQuery)) {
-//            System.out.println("PLZ Enter id");
-//            int id=scanner.nextInt();
+            enterId();
             updateUserStatement.setInt(3,id);
-//            String contactNumber;
-//            System.out.println("PLZ enter contact number");
-//            contactNumber=scanner.next();
+            enterPhonenumer();
             updateUserStatement.setString(1, contactNumber);
-            System.out.println("PLZ enter type of number\n[home =1,work =2 ,other =3,phone =4]");
-            PhoneNumber phoneNumber=new PhoneNumber();
-            int type=scanner.nextInt();
+            enterType();
             switch (type){
                 case 1:
                     updateUserStatement.setString(2, "home");
@@ -175,7 +169,6 @@ public class PhoneNumberDao {
             H2JDBCUtils.printSQLException(e);
         }
     }
-
     public  void selectById() {
         try (Connection connection = H2JDBCUtils.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(selectQuery);) {
@@ -238,5 +231,19 @@ public class PhoneNumberDao {
         }
         return id;
     }
-
+    public int enterId(){
+        System.out.println("enter id");
+        int id=scanner.nextInt();
+        return id;
+    }
+        public String enterPhonenumer(){
+        System.out.println("enter contact number");
+        String contactNumber=scanner.next();
+        return contactNumber;
+    }
+        public int enterType() {
+            System.out.println("PLZ enter type of number\n[home =1,work =2 ,other =3,phone =4]");
+            int type = scanner.nextInt();
+            return type;
+        }
 }
