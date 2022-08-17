@@ -236,12 +236,12 @@ public class PhoneNumberDao {
         int id=scanner.nextInt();
         return id;
     }
-        public String enterPhonenumer(){
+    public String enterPhonenumer(){
         System.out.println("enter contact number");
         String contactNumber=scanner.next();
         return contactNumber;
     }
-        public int enterType() {
+    public int enterType() {
             System.out.println("PLZ enter type of number\n[home =1,work =2 ,other =3,phone =4]");
             int type = scanner.nextInt();
             return type;

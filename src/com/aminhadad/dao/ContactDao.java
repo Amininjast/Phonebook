@@ -71,7 +71,6 @@ public class ContactDao {
             deleteStatement2.setInt(1,id);
             deleteStatement2.execute();
         } catch (SQLException e) {
-            // print SQL exception information
             H2JDBCUtils.printSQLException(e);
         }
     }
@@ -182,5 +181,14 @@ public class ContactDao {
         }
         return id;
     }
-
+    public String getFirstName(){
+        System.out.println("PLZ Enter first name");
+            String firstName=scanner.next();
+    return firstName;
+    }
+    public String getLastName(){
+        System.out.println("PLZ Enter last name");
+        String lastName=scanner.next();
+        return lastName;
+    }
 }
