@@ -106,11 +106,7 @@ public class ContactDao {
         try (Connection connection = H2JDBCUtils.getConnection();
              PreparedStatement updateUserStatement = connection.prepareStatement(updateUsersSQL)) {
             updateUserStatement.setInt(3, id);
-//            System.out.println("PLZ Enter first name");
-//            String firstName=scanner.next();
             updateUserStatement.setString(1, firstName);
-//            System.out.println("PLZ Enter last name");
-//            String lastName=scanner.next();
             updateUserStatement.setString(2, lastName);
             updateUserStatement.execute();
         } catch (SQLException e) {

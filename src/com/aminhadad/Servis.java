@@ -7,16 +7,19 @@ import java.sql.SQLException;
 import java.util.Scanner;
 
 public class Servis {
-    public static Scanner scanner=new Scanner(System.in);
+    public static Scanner scanner = new Scanner(System.in);
 
-    ContactDao contactDao=new ContactDao();
-    PhoneNumberDao phoneNumberDao=new PhoneNumberDao();
-    Function function=new Function();
-    int selectedMenu=0;
-    int type=0;
-    String contactNumber;
-    int id=0;
-        while (selectedMenu!=12){
+    ContactDao contactDao = new ContactDao();
+    PhoneNumberDao phoneNumberDao = new PhoneNumberDao();
+    Function function = new Function();
+    int selectedMenu = 0;
+    int type = 0;
+    String contactNumber, firstName, lastName;
+    int id = 0;
+
+        while(selectedMenu!=12)
+
+    {
         System.out.println("Phonebook");
         function.showMenu();
         selectedMenu = scanner.nextInt();
@@ -55,14 +58,14 @@ public class Servis {
                 break;
             case 5:
                 try {
-                    contactDao.updateRecord();
+                    contactDao.updateRecord(id, firstName, lastName);
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
                 break;
             case 6:
                 try {
-                    contactDao.deleteRecord();
+                    contactDao.deleteRecord(id);
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
@@ -75,21 +78,21 @@ public class Servis {
                 }
                 break;
             case 8:
-                phoneNumberDao.selectById();
+                phoneNumberDao.selectById(id);
                 break;
             case 9:
                 phoneNumberDao.selectAll();
                 break;
             case 10:
                 try {
-                    phoneNumberDao.updateRecord( id,contactNumber,type);
+                    phoneNumberDao.updateRecord(id, contactNumber, type);
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
                 break;
             case 11:
                 try {
-                    phoneNumberDao.deleteRecord();
+                    phoneNumberDao.deleteRecord(id);
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
