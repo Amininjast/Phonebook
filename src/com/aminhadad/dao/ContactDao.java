@@ -1,6 +1,6 @@
 package com.aminhadad.dao;
 
-import com.aminhadad.entity.Contact;
+import com.aminhadad.entities.Contact;
 
 import java.sql.*;
 import java.util.Scanner;

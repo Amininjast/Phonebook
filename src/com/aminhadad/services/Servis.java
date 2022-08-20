@@ -1,8 +1,9 @@
-package com.aminhadad;
+package com.aminhadad.services;
 
+import com.aminhadad.Function;
 import com.aminhadad.dao.ContactDao;
 import com.aminhadad.dao.PhoneNumberDao;
-import com.aminhadad.entity.Contact;
+import com.aminhadad.entities.Contact;
 
 import java.sql.SQLException;
 import java.util.Scanner;
@@ -40,7 +41,9 @@ public class Servis {
 
         int selectedMenu = 0;
         int type = 0;
-        String contactNumber, firstName, lastName;
+        String contactNumber=null;
+        String  firstName=null;
+        String  lastName=null;
         int id = 0;
 
         while (selectedMenu != 12) {
@@ -50,17 +53,11 @@ public class Servis {
             switch (selectedMenu) {
                 case 1:
 
-
-                  
                     break;
                 case 2:
-                  
 
-
-                  
                     break;
                 case 3:
-
                     phoneNumberDao.selectById(id);
                     break;
                 case 4:
@@ -68,19 +65,13 @@ public class Servis {
                     phoneNumberDao.selectAll();
                     break;
                 case 5:
-                  
-                        contactDao.updateRecord(id, firstName, lastName);
-                  
+                    contactDao.updateRecord(id, firstName, lastName);
                     break;
                 case 6:
-                  
-                        contactDao.deleteRecord(id);
-                  
+                    contactDao.deleteRecord(id);
                     break;
                 case 7:
-                  
-                        phoneNumberDao.insertPhoneNumber();
-                  
+                    phoneNumberDao.insertPhoneNumber();
                     break;
                 case 8:
                     phoneNumberDao.selectById(id);
@@ -89,14 +80,10 @@ public class Servis {
                     phoneNumberDao.selectAll();
                     break;
                 case 10:
-                  
-                        phoneNumberDao.updateRecord(id, contactNumber, type);
-                  
+                    phoneNumberDao.updateRecord(id, contactNumber, type);
                     break;
                 case 11:
-                  
-                        phoneNumberDao.deleteRecord(id);
-                  
+                    phoneNumberDao.deleteRecord(id);
                     break;
                 case 12:
                     break;

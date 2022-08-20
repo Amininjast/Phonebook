@@ -1,4 +1,4 @@
-package com.aminhadad.entity;
+package com.aminhadad.entities;
 
 public class Contact extends Entity {
     private String firstName;

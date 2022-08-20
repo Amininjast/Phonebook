@@ -1,8 +1,7 @@
 package com.aminhadad;
 
-import com.aminhadad.dao.ContactDao;
 import com.aminhadad.dao.H2JDBCUtils;
-import com.aminhadad.dao.PhoneNumberDao;
+import com.aminhadad.services.Servis;
 
 import java.sql.SQLException;
 import java.util.Scanner;

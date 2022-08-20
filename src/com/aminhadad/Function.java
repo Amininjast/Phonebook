@@ -1,6 +1,6 @@
 package com.aminhadad;
-import com.aminhadad.entity.Contact;
-import com.aminhadad.entity.PhoneNumber;
+import com.aminhadad.entities.Contact;
+import com.aminhadad.entities.PhoneNumber;
 
 import java.util.ArrayList;
 import java.util.Scanner;

@@ -1,4 +1,4 @@
-package com.aminhadad.entity;
+package com.aminhadad.entities;
 
 public class PhoneNumber {
     public enum NumberType{home,work,other,phone}
