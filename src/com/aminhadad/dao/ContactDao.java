@@ -1,5 +1,7 @@
 package com.aminhadad.dao;
 
+import com.aminhadad.entity.Contact;
+
 import java.sql.*;
 import java.util.Scanner;
 
@@ -133,7 +135,24 @@ public class ContactDao {
         }
     }
 
-    public void selectById(int id) {
+    public Contact selectById(int id) {
+        try (Connection connection = H2JDBCUtils.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(selectQuery);) {
+            preparedStatement.setInt(1, id);
+            ResultSet rs = preparedStatement.executeQuery();
+
+            while (rs.next()) {
+                String firstName = rs.getString("FIRSTNAME");
+                String lastName = rs.getString("LASTNAME");
+                return new Contact(id,firstName,lastName);
+            }
+        } catch (SQLException e) {
+            H2JDBCUtils.printSQLException(e);
+        }
+        return null;
+    }
+
+    /*public void selectById(int id) {
         try (Connection connection = H2JDBCUtils.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(selectQuery);) {
             preparedStatement.setInt(1, id);
@@ -148,7 +167,7 @@ public class ContactDao {
         } catch (SQLException e) {
             H2JDBCUtils.printSQLException(e);
         }
-    }
+    }*/
 
     public void selectAll() {
         try (Connection connection = H2JDBCUtils.getConnection();
