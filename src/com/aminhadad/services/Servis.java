@@ -4,6 +4,7 @@ import com.aminhadad.Function;
 import com.aminhadad.dao.ContactDao;
 import com.aminhadad.dao.PhoneNumberDao;
 import com.aminhadad.entities.Contact;
+import com.aminhadad.view.View;
 
 import java.sql.SQLException;
 import java.util.Scanner;
@@ -16,6 +17,7 @@ public class Servis {
     ContactDao contactDao = new ContactDao();
     PhoneNumberDao phoneNumberDao = new PhoneNumberDao();
     Function function = new Function();
+    View view =new View();
 
     private void createTable() throws SQLException {
         contactDao.createContactTable();
@@ -30,11 +32,7 @@ public class Servis {
         phoneNumberDao.insertPhoneNumber(contactDao.maxContacId());
     }
 
-    private Contact findById(){
-        System.out.println("enter id");
-        int id = scanner.nextInt();
-        return contactDao.selectById(id);
-    }
+
 
     private void c() throws SQLException, ClassNotFoundException{
 
@@ -47,7 +45,7 @@ public class Servis {
         int id = 0;
 
         while (selectedMenu != 12) {
-            System.out.println("Phonebook");
+            view.printPhonebook();
             function.showMenu();
             selectedMenu = scanner.nextInt();
             switch (selectedMenu) {
