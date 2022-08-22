@@ -104,16 +104,29 @@ public class ContactDao {
         // Step 4: try-with-resource statement will auto close the connection.
     }
 
-    public void updateRecord(int id, String firstName, String lastName) throws SQLException {
+//    public void updateRecord(int id, String firstName, String lastName) throws SQLException {
+//        try (Connection connection = H2JDBCUtils.getConnection();
+//             PreparedStatement updateUserStatement = connection.prepareStatement(updateUsersSQL)) {
+//            updateUserStatement.setInt(3, id);
+//            updateUserStatement.setString(1, firstName);
+//            updateUserStatement.setString(2, lastName);
+//            updateUserStatement.execute();
+//        } catch (SQLException e) {
+//            H2JDBCUtils.printSQLException(e);
+//        }
+//    }
+    public Contact updateRecord(int id, String firstName, String lastName) throws SQLException {
         try (Connection connection = H2JDBCUtils.getConnection();
              PreparedStatement updateUserStatement = connection.prepareStatement(updateUsersSQL)) {
             updateUserStatement.setInt(3, id);
             updateUserStatement.setString(1, firstName);
             updateUserStatement.setString(2, lastName);
             updateUserStatement.execute();
+            return new Contact(id,firstName,lastName);
         } catch (SQLException e) {
             H2JDBCUtils.printSQLException(e);
         }
+        return null;
     }
 
     public void selectById() {
@@ -144,7 +157,7 @@ public class ContactDao {
             while (rs.next()) {
                 String firstName = rs.getString("FIRSTNAME");
                 String lastName = rs.getString("LASTNAME");
-                return new Contact(id,firstName,lastName);
+                return new Contact(id, firstName, lastName);
             }
         } catch (SQLException e) {
             H2JDBCUtils.printSQLException(e);
@@ -200,15 +213,5 @@ public class ContactDao {
         return id;
     }
 
-    public String getFirstName() {
-        System.out.println("PLZ Enter first name");
-        String firstName = scanner.next();
-        return firstName;
-    }
 
-    public String getLastName() {
-        System.out.println("PLZ Enter last name");
-        String lastName = scanner.next();
-        return lastName;
-    }
 }
