@@ -34,7 +34,7 @@ public class Servis {
 
 
 
-    private void c() throws SQLException, ClassNotFoundException{
+    public void c() throws SQLException, ClassNotFoundException{
 
 
         int selectedMenu = 0;
