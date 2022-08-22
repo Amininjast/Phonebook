@@ -46,7 +46,7 @@ public class Servis {
 
         while (selectedMenu != 12) {
             view.printPhonebook();
-            function.showMenu();
+            view.showMenu();
             selectedMenu = scanner.nextInt();
             switch (selectedMenu) {
                 case 1:
