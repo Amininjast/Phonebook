@@ -30,17 +30,13 @@ public class ContactDao {
         }
     }
 
-    public void insertContact() throws SQLException {
+    public void insertContact(Contact contact) throws SQLException {
         try (Connection connection = H2JDBCUtils.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(insertContactsSql)) {
             int contacIdCouner = maxContacId();
             preparedStatement.setInt(1, ++contacIdCouner);
-            System.out.println("PLZ Enter first name");
-            String firstName = scanner.next();
-            preparedStatement.setString(2, firstName);
-            System.out.println("PLZ Enter last name");
-            String lastName = scanner.next();
-            preparedStatement.setString(3, lastName);
+            preparedStatement.setString(2, contact.getFirstName());
+            preparedStatement.setString(3, contact.getLastName());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             H2JDBCUtils.printSQLException(e);

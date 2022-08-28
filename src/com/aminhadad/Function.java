@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 public class Function {
     public static Scanner scanner=new Scanner(System.in);
-    ArrayList<Contact> contactList =new ArrayList<Contact>();
+    ArrayList<Contact> contactList =new ArrayList<>();
 
     public void create(){
       Contact contact =new Contact();

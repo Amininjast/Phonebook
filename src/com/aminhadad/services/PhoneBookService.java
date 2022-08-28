@@ -9,7 +9,7 @@ import com.aminhadad.view.View;
 import java.sql.SQLException;
 import java.util.Scanner;
 
-public class Servis {
+public class PhoneBookService {
 
 
     private Scanner scanner = new Scanner(System.in);
@@ -24,9 +24,7 @@ public class Servis {
         phoneNumberDao.createPhoneNumberTable();
     }
 
-    private void insertContract() throws SQLException {
-        contactDao.insertContact();
-    }
+
 
     private void insertPhoneNumber() throws SQLException {
         phoneNumberDao.insertPhoneNumber(contactDao.maxContacId());
@@ -87,5 +85,9 @@ public class Servis {
                     break;
             }
         }
+    }
+
+    public void save(Contact contact) throws SQLException {
+        contactDao.insertContact(contact);
     }
 }
