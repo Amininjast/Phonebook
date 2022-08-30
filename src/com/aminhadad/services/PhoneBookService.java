@@ -27,6 +27,10 @@ public class PhoneBookService {
     private void insertPhoneNumber() throws SQLException {
         phoneNumberDao.insertPhoneNumber(contactDao.maxContacId());
     }
+    public void starting() throws SQLException {
+    contactDao.createContactTable();
+    phoneNumberDao.createPhoneNumberTable();
+    }
 
 
     public void c() throws SQLException, ClassNotFoundException {

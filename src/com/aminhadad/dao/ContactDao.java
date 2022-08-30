@@ -8,7 +8,7 @@ import java.util.Scanner;
 public class ContactDao {
     Scanner scanner = new Scanner(System.in);
     PhoneNumberDao phoneNumberDao = new PhoneNumberDao();
-    private static final String createTableSQL = "CREATE TABLE CONTACTS (ID  INT PRIMARY KEY NOT NULL ," +
+    private static final String createTableSQL = "CREATE TABLE IF NOT EXISTS CONTACTS (ID  INT PRIMARY KEY NOT NULL ," +
             "  FIRSTNAME VARCHAR (20), LASTNAME VARCHAR(20));";
     private static final String insertContactsSql = "INSERT INTO CONTACTS" +
             "  (id, firstName, lastName) VALUES " +
@@ -170,9 +170,7 @@ public class ContactDao {
         }
         return id;
     }
-    public void starting(){
-        if ()
-    }
+
      /*public void selectById(int id) {
         try (Connection connection = H2JDBCUtils.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(selectQuery);) {

@@ -9,6 +9,7 @@ public class Main {
         PhoneBookService phoneBookService=new PhoneBookService();
         View view=new View();
 
+        phoneBookService.starting();
         phoneBookService.c();
         view.printPhonebook();
         view.showMenu();

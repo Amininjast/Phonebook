@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 public class PhoneNumberDao {
     Scanner scanner = new Scanner(System.in);
-    private static final String createTablePhoneNumber = "CREATE TABLE PHONENUMBER (ID  INT PRIMARY KEY NOT NULL ," +
+    private static final String createTablePhoneNumber = "CREATE TABLE IF NOT EXISTS PHONENUMBER (ID  INT PRIMARY KEY NOT NULL ," +
             "  number VARCHAR (20), numberType VARCHAR(20), fk_contact INT NOT NULL ,FOREIGN KEY (fk_contact) REFERENCES CONTACTS(ID)" + "  );";
 
     private static final String insertPhoneNumberSQL = "INSERT INTO PHONENUMBER" +
