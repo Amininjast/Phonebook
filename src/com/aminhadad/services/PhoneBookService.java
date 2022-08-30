@@ -1,6 +1,5 @@
 package com.aminhadad.services;
 
-import com.aminhadad.Function;
 import com.aminhadad.dao.ContactDao;
 import com.aminhadad.dao.PhoneNumberDao;
 import com.aminhadad.entities.Contact;
@@ -16,7 +15,6 @@ public class PhoneBookService {
 
     ContactDao contactDao = new ContactDao();
     PhoneNumberDao phoneNumberDao = new PhoneNumberDao();
-    Function function = new Function();
     View view = new View();
 
     private void createTable() throws SQLException {
