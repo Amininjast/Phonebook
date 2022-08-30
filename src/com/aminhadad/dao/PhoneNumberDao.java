@@ -20,16 +20,16 @@ public class PhoneNumberDao {
     private static final String maxPhoneNumberIdQuery = "SELECT MAX(ID) maxId FROM PHONENUMBER";
 
     public void createPhoneNumberTable() throws SQLException {
-        try (Connection connection = H2JDBCUtils.getConnection();
+        try (Connection connection = DatabaseConnection.getConnection();
              Statement statement = connection.createStatement();) {
             statement.execute(createTablePhoneNumber);
         } catch (SQLException e) {
-            H2JDBCUtils.printSQLException(e);
+            DatabaseConnection.printSQLException(e);
         }
     }
 
     public void insertPhoneNumber() throws SQLException {
-        try (Connection connection = H2JDBCUtils.getConnection();
+        try (Connection connection = DatabaseConnection.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(insertPhoneNumberSQL)) {
             int phoneNumberIdCounter = maxPhoneNumberId();
             preparedStatement.setInt(1, ++phoneNumberIdCounter);
@@ -58,12 +58,12 @@ public class PhoneNumberDao {
             preparedStatement.setInt(4, contacId);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
-            H2JDBCUtils.printSQLException(e);
+            DatabaseConnection.printSQLException(e);
         }
     }
 
     public void insertPhoneNumber(int a) throws SQLException {
-        try (Connection connection = H2JDBCUtils.getConnection();
+        try (Connection connection = DatabaseConnection.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(insertPhoneNumberSQL)) {
             int phoneNumberIdCounter = maxPhoneNumberId();
             preparedStatement.setInt(1, ++phoneNumberIdCounter);
@@ -90,34 +90,34 @@ public class PhoneNumberDao {
             preparedStatement.setInt(4, contacId);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
-            H2JDBCUtils.printSQLException(e);
+            DatabaseConnection.printSQLException(e);
         }
     }
 
     public void deleteRecord() throws SQLException {
-        try (Connection connection = H2JDBCUtils.getConnection();
+        try (Connection connection = DatabaseConnection.getConnection();
              PreparedStatement deleteStatement = connection.prepareStatement(deletePhoneNumberQuery);) {
             System.out.println("PLZ Enter id");
             int id = scanner.nextInt();
             deleteStatement.setInt(1, id);
             deleteStatement.execute();
         } catch (SQLException e) {
-            H2JDBCUtils.printSQLException(e);
+            DatabaseConnection.printSQLException(e);
         }
     }
 
     public void deleteRecord(int id) throws SQLException {
-        try (Connection connection = H2JDBCUtils.getConnection();
+        try (Connection connection = DatabaseConnection.getConnection();
              PreparedStatement deleteStatement = connection.prepareStatement(deletePhoneNumberQuery);) {
             deleteStatement.setInt(1, id);
             deleteStatement.execute();
         } catch (SQLException e) {
-            H2JDBCUtils.printSQLException(e);
+            DatabaseConnection.printSQLException(e);
         }
     }
 
     public void updateRecord() throws SQLException {
-        try (Connection connection = H2JDBCUtils.getConnection();
+        try (Connection connection = DatabaseConnection.getConnection();
              PreparedStatement updateUserStatement = connection.prepareStatement(updatePhoneNumberQuery)) {
             System.out.println("PLZ Enter id");
             int id = scanner.nextInt();
@@ -145,12 +145,12 @@ public class PhoneNumberDao {
             }
             updateUserStatement.execute();
         } catch (SQLException e) {
-            H2JDBCUtils.printSQLException(e);
+            DatabaseConnection.printSQLException(e);
         }
     }
 
     public void updateRecord(int id, String contactNumber, int type) throws SQLException {
-        try (Connection connection = H2JDBCUtils.getConnection();
+        try (Connection connection = DatabaseConnection.getConnection();
              PreparedStatement updateUserStatement = connection.prepareStatement(updatePhoneNumberQuery)) {
             enterId();
             updateUserStatement.setInt(3, id);
@@ -173,12 +173,12 @@ public class PhoneNumberDao {
             }
             updateUserStatement.execute();
         } catch (SQLException e) {
-            H2JDBCUtils.printSQLException(e);
+            DatabaseConnection.printSQLException(e);
         }
     }
 
     public void selectById() {
-        try (Connection connection = H2JDBCUtils.getConnection();
+        try (Connection connection = DatabaseConnection.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(selectQuery);) {
             System.out.println("enter id");
             int id = scanner.nextInt();
@@ -191,12 +191,12 @@ public class PhoneNumberDao {
                 System.out.println(ID + "," + number + "," + numberType);
             }
         } catch (SQLException e) {
-            H2JDBCUtils.printSQLException(e);
+            DatabaseConnection.printSQLException(e);
         }
     }
 
     public void selectById(int id) {
-        try (Connection connection = H2JDBCUtils.getConnection();
+        try (Connection connection = DatabaseConnection.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(selectQuery);) {
             preparedStatement.setInt(1, id);
             ResultSet rs = preparedStatement.executeQuery();
@@ -208,12 +208,12 @@ public class PhoneNumberDao {
                 System.out.println();
             }
         } catch (SQLException e) {
-            H2JDBCUtils.printSQLException(e);
+            DatabaseConnection.printSQLException(e);
         }
     }
 
     public void selectAll() {
-        try (Connection connection = H2JDBCUtils.getConnection();
+        try (Connection connection = DatabaseConnection.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(selectAll);) {
             ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()) {
@@ -224,13 +224,13 @@ public class PhoneNumberDao {
                 System.out.println();
             }
         } catch (SQLException e) {
-            H2JDBCUtils.printSQLException(e);
+            DatabaseConnection.printSQLException(e);
         }
     }
 
     public int maxPhoneNumberId() throws SQLException {
         int id = 0;
-        try (Connection connection = H2JDBCUtils.getConnection();
+        try (Connection connection = DatabaseConnection.getConnection();
              PreparedStatement maxIdStatement = connection.prepareStatement(maxPhoneNumberIdQuery);) {
             ResultSet resultSet = maxIdStatement.executeQuery();
             resultSet.next();
@@ -238,7 +238,7 @@ public class PhoneNumberDao {
             System.out.println(id);
             System.out.println();
         } catch (SQLException e) {
-            H2JDBCUtils.printSQLException(e);
+            DatabaseConnection.printSQLException(e);
         }
         return id;
     }

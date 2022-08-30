@@ -33,7 +33,7 @@ public class PhoneBookService {
     }
 
 
-    public void Menu() throws SQLException, ClassNotFoundException {
+    public void menu() throws SQLException, ClassNotFoundException {
 
         int selectedMenu = 0;
         int type = 0;

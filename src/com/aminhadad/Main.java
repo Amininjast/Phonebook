@@ -10,7 +10,7 @@ public class Main {
         View view=new View();
 
         phoneBookService.starting();
-        phoneBookService.Menu();
+        phoneBookService.menu();
         view.printPhonebook();
         view.showMenu();
         }

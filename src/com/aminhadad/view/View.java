@@ -1,12 +1,8 @@
 package com.aminhadad.view;
 
-import com.aminhadad.dao.ContactDao;
-import com.aminhadad.dao.H2JDBCUtils;
 import com.aminhadad.entities.Contact;
 import com.aminhadad.services.PhoneBookService;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Scanner;
 
