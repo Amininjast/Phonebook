@@ -180,6 +180,18 @@ public class ContactDao {
         return id;
     }
 
+    public void update(Contact contact) {
+        try (Connection connection = DatabaseConnection.getConnection();
+             PreparedStatement updateUserStatement = connection.prepareStatement(updateUsersSQL)) {
+            updateUserStatement.setInt(3, contact.getId());
+            updateUserStatement.setString(1, contact.getFirstName());
+            updateUserStatement.setString(2, contact.getLastName());
+            updateUserStatement.execute();
+        } catch (SQLException e) {
+            DatabaseConnection.printSQLException(e);
+        }
+    }
+
      /*public void selectById(int id) {
         try (Connection connection = H2JDBCUtils.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(selectQuery);) {
