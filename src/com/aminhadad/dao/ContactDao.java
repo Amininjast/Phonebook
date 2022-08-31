@@ -28,6 +28,7 @@ public class ContactDao {
             DatabaseConnection.printSQLException(e);
         }
     }
+
     public void insertContact(Contact contact) throws SQLException {
         try (Connection connection = DatabaseConnection.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(insertContactsSql)) {
@@ -40,6 +41,7 @@ public class ContactDao {
             DatabaseConnection.printSQLException(e);
         }
     }
+
     public void deleteRecord(int id) throws SQLException {
         try (Connection connection = DatabaseConnection.getConnection();
              PreparedStatement deleteStatement = connection.prepareStatement(deletePhoneNumberQuery);) {
@@ -52,6 +54,7 @@ public class ContactDao {
             DatabaseConnection.printSQLException(e);
         }
     }
+
     public void updateRecord() throws SQLException {
         // Step 1: Establishing a Connection
         try (Connection connection = DatabaseConnection.getConnection();
@@ -77,6 +80,7 @@ public class ContactDao {
 
         // Step 4: try-with-resource statement will auto close the connection.
     }
+
     public void deleteRecord() throws SQLException {
         // Step 1: Establishing a Connection
         try (Connection connection = DatabaseConnection.getConnection();
@@ -94,6 +98,7 @@ public class ContactDao {
             DatabaseConnection.printSQLException(e);
         }
     }
+
     public Contact updateRecord(int id, String firstName, String lastName) throws SQLException {
         try (Connection connection = DatabaseConnection.getConnection();
              PreparedStatement updateUserStatement = connection.prepareStatement(updateUsersSQL)) {
@@ -101,12 +106,13 @@ public class ContactDao {
             updateUserStatement.setString(1, firstName);
             updateUserStatement.setString(2, lastName);
             updateUserStatement.execute();
-            return new Contact(id,firstName,lastName);
+            return new Contact(id, firstName, lastName);
         } catch (SQLException e) {
             DatabaseConnection.printSQLException(e);
         }
         return null;
     }
+
     public void selectById() {
         try (Connection connection = DatabaseConnection.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(selectQuery);) {
@@ -125,6 +131,7 @@ public class ContactDao {
             DatabaseConnection.printSQLException(e);
         }
     }
+
     public Contact selectById(int id) {
         try (Connection connection = DatabaseConnection.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(selectQuery);) {
@@ -141,6 +148,7 @@ public class ContactDao {
         }
         return null;
     }
+
     public void selectAll() {
         try (Connection connection = DatabaseConnection.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(selectAll);) {
@@ -156,6 +164,7 @@ public class ContactDao {
             DatabaseConnection.printSQLException(e);
         }
     }
+
     public int maxContacId() throws SQLException {
         int id = 0;
         try (Connection connection = DatabaseConnection.getConnection();

@@ -17,23 +17,18 @@ public class PhoneBookService {
     PhoneNumberDao phoneNumberDao = new PhoneNumberDao();
     View view = new View();
 
-    private void createTable() throws SQLException {
+
+    private void insertPhoneNumber() throws SQLException {
+        phoneNumberDao.insertPhoneNumber(contactDao.maxContacId());
+    }
+
+    public void starting() throws SQLException {
         contactDao.createContactTable();
         phoneNumberDao.createPhoneNumberTable();
     }
 
 
-
-    private void insertPhoneNumber() throws SQLException {
-        phoneNumberDao.insertPhoneNumber(contactDao.maxContacId());
-    }
-    public void starting() throws SQLException {
-    contactDao.createContactTable();
-    phoneNumberDao.createPhoneNumberTable();
-    }
-
-
-    public void menu() throws SQLException, ClassNotFoundException {
+    public void createMenu() throws SQLException, ClassNotFoundException {
 
         int selectedMenu = 0;
         int type = 0;

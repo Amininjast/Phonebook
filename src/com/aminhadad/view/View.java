@@ -7,18 +7,14 @@ import java.sql.SQLException;
 import java.util.Scanner;
 
 public class View {
-
     private Scanner scanner = new Scanner(System.in);
-
     private PhoneBookService service = new PhoneBookService();
-
 
     public void printPhonebook() {
         System.out.println("Phonebook");
     }
 
-
-    private void insertContact(){
+    private void insertContact() {
         System.out.println("PLZ Enter first name");
         String firstName = scanner.next();
         System.out.println("PLZ Enter last name");
@@ -36,7 +32,8 @@ public class View {
         }
 
     }
-    public void showMenu(){
+
+    public void showMenu() {
         System.out.println("1-Insert Contact\n2-Show Contact\n3-Show All Contacts\n4-Update Contact\n" +
                 "5-delete Contact\n6-Insert number\n7-Show PhoneNumber\n8-Show All PhoneNumber\n9-Update PhoneNumber\n10-delete PhoneNumber" +
                 "\n11-Exit\n");
