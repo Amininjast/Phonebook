@@ -55,32 +55,6 @@ public class ContactDao {
         }
     }
 
-    public void updateRecord() throws SQLException {
-        // Step 1: Establishing a Connection
-        try (Connection connection = DatabaseConnection.getConnection();
-             // Step 2:Create a statement using connection object
-             PreparedStatement updateUserStatement = connection.prepareStatement(updateUsersSQL)) {
-            System.out.println("PLZ Enter id");
-            int id = scanner.nextInt();
-            updateUserStatement.setInt(3, id);
-            System.out.println("PLZ Enter first name");
-            String firstName = scanner.next();
-            updateUserStatement.setString(1, firstName);
-            System.out.println("PLZ Enter last name");
-            String lastName = scanner.next();
-            updateUserStatement.setString(2, lastName);
-
-            // Ste8p 3: Execute the query or update query
-            updateUserStatement.execute();
-        } catch (SQLException e) {
-
-            // print SQL exception information
-            DatabaseConnection.printSQLException(e);
-        }
-
-        // Step 4: try-with-resource statement will auto close the connection.
-    }
-
     public void deleteRecord() throws SQLException {
         // Step 1: Establishing a Connection
         try (Connection connection = DatabaseConnection.getConnection();
@@ -95,39 +69,6 @@ public class ContactDao {
             deleteStatement2.execute();
         } catch (SQLException e) {
             // print SQL exception information
-            DatabaseConnection.printSQLException(e);
-        }
-    }
-
-    public Contact updateRecord(int id, String firstName, String lastName) throws SQLException {
-        try (Connection connection = DatabaseConnection.getConnection();
-             PreparedStatement updateUserStatement = connection.prepareStatement(updateUsersSQL)) {
-            updateUserStatement.setInt(3, id);
-            updateUserStatement.setString(1, firstName);
-            updateUserStatement.setString(2, lastName);
-            updateUserStatement.execute();
-            return new Contact(id, firstName, lastName);
-        } catch (SQLException e) {
-            DatabaseConnection.printSQLException(e);
-        }
-        return null;
-    }
-
-    public void selectById() {
-        try (Connection connection = DatabaseConnection.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(selectQuery);) {
-            System.out.println("enter id");
-            int id = scanner.nextInt();
-            preparedStatement.setInt(1, id);
-            ResultSet rs = preparedStatement.executeQuery();
-            while (rs.next()) {
-                int ID = rs.getInt("ID");
-                String FIRSTNAME = rs.getString("FIRSTNAME");
-                String LASTTNAME = rs.getString("LASTNAME");
-                System.out.println(ID + "," + FIRSTNAME + "," + LASTTNAME);
-                phoneNumberDao.selectById(id);
-            }
-        } catch (SQLException e) {
             DatabaseConnection.printSQLException(e);
         }
     }
@@ -192,31 +133,4 @@ public class ContactDao {
         }
     }
 
-     /*public void selectById(int id) {
-        try (Connection connection = H2JDBCUtils.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(selectQuery);) {
-            preparedStatement.setInt(1, id);
-            ResultSet rs = preparedStatement.executeQuery();
-            while (rs.next()) {
-                int ID = rs.getInt("ID");
-                String FIRSTNAME = rs.getString("FIRSTNAME");
-                String LASTTNAME = rs.getString("LASTNAME");
-                System.out.println(ID + "," + FIRSTNAME + "," + LASTTNAME);
-                phoneNumberDao.selectById(id);
-            }
-        } catch (SQLException e) {
-            H2JDBCUtils.printSQLException(e);
-        }
-    }*/
-    //    public void updateRecord(int id, String firstName, String lastName) throws SQLException {
-//        try (Connection connection = H2JDBCUtils.getConnection();
-//             PreparedStatement updateUserStatement = connection.prepareStatement(updateUsersSQL)) {
-//            updateUserStatement.setInt(3, id);
-//            updateUserStatement.setString(1, firstName);
-//            updateUserStatement.setString(2, lastName);
-//            updateUserStatement.execute();
-//        } catch (SQLException e) {
-//            H2JDBCUtils.printSQLException(e);
-//        }
-//    }
 }
